@@ -23,6 +23,10 @@ ADD @A @B @C //@A is data literal or memory address, @B is data literal or memor
 SUB @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 INC @A //@A is the address of the variable to be incremented
 DEC @A //@A is the address of the variable to be decremented
+MULT @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+DIV @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+BSL @A //@A is the address of the variable to be bit shifted left
+BSR @A //@A is the address of the variable to be bit shifted right
 NEG @A //@A is the address of the variable to be negated arithmetically
 NAND @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 NOR @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
@@ -30,3 +34,31 @@ AND @A @B @C //@A is data literal or memory address, @B is data literal or memor
 OR @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 XOR @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 NOT @A //@A is the address of the variable to be negated logically
+
+Memory Instructions
+
+PUSH @A //@A is data literal or memory address
+POP @A //@A is a memory address
+LOAD @A @B //@A is data literal, @B is memory address
+COPY @A @B //@A is memory address, @B is memory address
+
+I/O Instructions
+
+SEND @A //@A is data literal or memory address
+READ @A //@A is memory address
+
+Program Control Instructions
+
+BOF @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+BEQ @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+BGT @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+BLT @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+BGTE @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+BLTE @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+BNEQ @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal
+JMP/GOTO @A //@A is memory location literal
+
+Miscellaneous Instructions
+
+HALT
+NOP
