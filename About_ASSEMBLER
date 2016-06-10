@@ -62,7 +62,7 @@ variable _IDENTIFIER_ = @A
 Labels do NOT need to be defined before they are used in assembly. The assembler makes an initial pass over the source to construct a symbol table.
 The assembler does NOT manage memory allocation, so either the programmer or the compiler is responsible for correctly manipulating memory.
 
-The assembler also supports the definition of macroinstructions outside of the default language package. These "functions" are inserted INLINE, and not handled with subroutines/procedures. Macros can be defined anywhere in the file, and must follow the formula:
+The assembler also supports the definition of macroinstructions outside of the default language package. These "functions" are inserted INLINE, and not handled with subroutines/procedures. Macros must be defined in the beginning of the file, and must follow the formula:
 
 MACRO _IDENTIFIER_
 //CODE
