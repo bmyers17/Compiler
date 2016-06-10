@@ -74,3 +74,8 @@ Again, the programmer is responsible for dealing with any memory conflicts that 
 
 Comments in assembly are prefaced with //
 Each statement should be separated by a newline character.
+The very first line in the file must contain the actual line in program memory onto which the program will be loaded, in the format:
+
+@1A9F
+
+Where the location is specified in hexidecimal.
