@@ -1,0 +1,26 @@
+Machine Instructions:
+
+HALT - Halts program execution by repeatedly loading the current instruction (NOP)
+NOP - Empty instruction
+FETCH - Moves the data at the address stored in $address to $AC
+ADD - Adds the data at the address stored in $address to $AC, storing the result in $AC
+NAND - NANDs the data at the address stored in $address to $AC, storing the result in $AC
+READ - Stores the value on the input port at the time of execution to $AC
+WRITE - Copies the value in $AC at the time of execution to the $OUT register port
+BUFF_$AC - Copies the value in $AC to the $address buffer for data memory
+BUFF_LIT - Loads the 12 bit literal argument in the instruction into the $address buffer for data memory
+STORE - Stores the value in $AC to the address stored in $address in data memory
+LOAD - Loads the immediately following word ($PC + 1 in program memory) to $AC
+BOF - Branches to the immediately following word in program memory if the data at $address in memory plus $AC yields overflow
+BEQ - Branches to the immediately following word in program memory if the data at $address in memory is equal to $AC
+JMP - Unconditional branch to the immediately following word in program memory
+
+Assembly Instructions (extended instruction set)
+
+Arithmetic Instructions
+
+ADD @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+SUB @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+INC @A //@A is the address of the variable to be incremented
+DEC @A //@A is the address of the variable to be decremented
+NEG @A //@A is the address of the variable to be negated
