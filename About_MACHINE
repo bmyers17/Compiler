@@ -62,3 +62,32 @@ Miscellaneous Instructions
 
 HALT
 NOP
+
+The assembly also supports two types of labels:
+
+The first is a program label. The syntax looks like this:
+
+label _IDENTIFIER_ = here
+
+_IDENTIFIER_ can now be used in any program control statements to reference to this location in the linear progression of assembly code.
+
+The second type of label is a variable label. The syntax looks like this:
+
+label _IDENTIFIER_ = @A
+or
+variable _IDENTIFIER_ = @A
+
+@A is the address in data memory of the variable to be stored. Although the syntax is similar, the two labels serve very different purposes.
+Labels do NOT need to be defined before they are used in assembly. The assembler makes an initial pass over the source to construct a symbol table.
+The assembler does NOT manage memory allocation, so either the programmer or the compiler is responsible for correctly manipulating memory.
+
+The assembler also supports the definition of macroinstructions outside of the default language package. These "functions" are inserted INLINE, and not handled with subroutines/procedures. Macros can be defined anywhere in the file, and must follow the formula:
+
+MACRO _IDENTIFIER_
+//CODE
+END
+
+Again, the programmer is responsible for dealing with any memory conflicts that result.
+
+Comments in assembly are prefaced with //
+Each statement should be separated by a newline character.
