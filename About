@@ -17,10 +17,16 @@ JMP - Unconditional branch to the immediately following word in program memory
 
 Assembly Instructions (extended instruction set)
 
-Arithmetic Instructions
+Arithmetic/Logical Instructions
 
 ADD @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 SUB @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 INC @A //@A is the address of the variable to be incremented
 DEC @A //@A is the address of the variable to be decremented
-NEG @A //@A is the address of the variable to be negated
+NEG @A //@A is the address of the variable to be negated arithmetically
+NAND @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+NOR @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+AND @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+OR @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+XOR @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
+NOT @A //@A is the address of the variable to be negated logically
