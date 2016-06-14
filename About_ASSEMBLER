@@ -6,8 +6,6 @@ ADD @A @B @C //@A is data literal or memory address, @B is data literal or memor
 SUB @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 INC @A //@A is the address of the variable to be incremented
 DEC @A //@A is the address of the variable to be decremented
-MULT @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
-DIV @A @B @C //@A is data literal or memory address, @B is data literal or memory address, and @C is memory location literal or pointer address
 BSL @A //@A is the address of the variable to be bit shifted left
 BSR @A //@A is the address of the variable to be bit shifted right
 NEG @A //@A is the address of the variable to be negated arithmetically
@@ -56,7 +54,7 @@ _IDENTIFIER_ can now be used in any program control statements to reference to t
 
 The second type of label is a variable label. The syntax looks like this:
 
-variable _IDENTIFIER_ = @A
+label _IDENTIFIER_ = @A
 
 @A is the address in data memory of the variable to be stored. Although the syntax is similar, the two labels serve very different purposes.
 Labels do NOT need to be defined before they are used in assembly. The assembler makes an initial pass over the source to construct a symbol table.
@@ -68,11 +66,11 @@ MACRO _IDENTIFIER_
 //CODE
 END
 
-Again, the programmer is responsible for dealing with any memory conflicts that result.
+Again, the programmer is responsible for dealing with any memory conflicts that result. Inbuilt assembly macroinstructions are guaranteed to be safe.
 
 Comments in assembly are prefaced with //
 Each statement should be separated by a newline character.
-The very first line in the file must contain the actual line in program memory onto which the program will be loaded, in the format:
+The very first noncomment line in the file must contain the actual line in program memory onto which the program will be loaded, in the format:
 
 @1A9F
 
