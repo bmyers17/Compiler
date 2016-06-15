@@ -57,6 +57,8 @@ public class Assembler
 
 			if (index > 0)
 				updatedSource.add(line.substring(0, index));
+			else if (line.length() > 0)
+				updatedSource.add(line);
 		}
 
 		String[] sourceNoComments = new String[updatedSource.size()];
