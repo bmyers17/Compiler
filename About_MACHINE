@@ -7,8 +7,9 @@ ADD - Adds the data at the address stored in $address to $AC, storing the result
 NAND - NANDs the data at the address stored in $address to $AC, storing the result in $AC
 READ - Stores the value on the input port at the time of execution to $AC
 WRITE - Copies the value in $AC at the time of execution to the $OUT register port
-BUFF_$AC - Copies the value in $AC to the $address buffer for data memory
-BUFF_LIT - Loads the 12 bit literal argument in the instruction into the $address buffer for data memory
+DATA - Copies the value in $AC to the $data buffer for data memory
+ACAD - Copies the value in $AC to the $address buffer for data memory
+LITAD - Loads the 12 bit literal argument in the instruction into the $address buffer for data memory
 STORE - Stores the value in $AC to the address stored in $address in data memory
 LOAD - Loads the immediately following word ($PC + 1 in program memory) to $AC
 BOF - Branches to the immediately following word in program memory if the data at $address in memory plus $AC yields overflow

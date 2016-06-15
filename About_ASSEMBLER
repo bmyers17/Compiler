@@ -62,7 +62,7 @@ The assembler does NOT manage memory allocation, so either the programmer or the
 
 The assembler also supports the definition of macroinstructions outside of the default language package. These "functions" are inserted INLINE, and not handled with subroutines/procedures. Macros must be defined in the beginning of the file, and must follow the formula:
 
-MACRO _IDENTIFIER_
+MACRO _IDENTIFIER_ [@0 [@1 [@2...]]]
 //CODE
 END
 
