@@ -8,18 +8,21 @@ import java.io.File;
 public class Assembler
 {
 	private static HashMap<String, String[]> implementations;
+	private static HashMap<String, String> opcodes;
+	private static HashMap<String, String> types;
 	private static HashMap<String, String> symbols;
 	private static HashSet<String> machineCodes;
 	private static int memoryLocation;
 
-	private static void initializeImplementations(File insImplementations)
+	public static void initializeImplementations(File insImplementations)
 	{
 		implementations = new HashMap<String, String[]>();
+		opcodes = new HashMap<String, String>();
+		types = new HashMap<String, String>();
 	}
 
-	public static String[] assemble(String[] source, File instructionFile)
+	public static String[] assemble(String[] source)
 	{
-		initializeImplementations(instructionFile);
 		source = initialPass(source);
 		
 		return finalPass(source);
@@ -40,7 +43,8 @@ public class Assembler
 
 	private static String[] finalPass(String[] source)
 	{
-		return null;
+		replaceSymbols(source);
+		return Interpreter.translate(source);
 	}
 
 	private static String[] removeComments(String[] source)
@@ -195,5 +199,19 @@ public class Assembler
 			sourceNoSymbols[k] = updatedSource.get(k);
 
 		return sourceNoSymbols;
+	}
+
+	private static void replaceSymbols(String[] source)
+	{
+		Iterator<String> keys = symbols.keySet().iterator();
+
+		while (keys.hasNext())
+		{
+			String target = keys.next();
+			String replace = symbols.get(target);
+
+			for (int k = 0; k < source.length; k++)
+				source[k] = source[k].replace(target, replace);
+		}
 	}
 }

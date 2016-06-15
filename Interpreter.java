@@ -6,13 +6,13 @@ public class Interpreter
 	private static HashMap<String, String> codes;
 	private static HashMap<String, String> types;
 
-	public Interpreter(HashMap<String, String> opcodes, HashMap<String, String> insTypes)
+	public static void initialize(HashMap<String, String> opcodes, HashMap<String, String> insTypes)
 	{
 		codes = opcodes;
 		types = insTypes;
 	}
 
-	public String[] translate(String lines[])
+	public static String[] translate(String lines[])
 	{
 		int length = lines.length;
 
