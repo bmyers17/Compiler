@@ -187,6 +187,8 @@ public class Assembler
 
 				if (value.equals("here"))
 					value = Integer.toString(memoryLocation + updatedSource.size(), 16);
+				else if (symbols.containsKey(value))
+					value = symbols.get(value);
 
 				symbols.put(id, value);
 			}
