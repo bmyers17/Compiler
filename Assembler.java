@@ -44,7 +44,7 @@ public class Assembler
 	private static String[] finalPass(String[] source)
 	{
 		replaceSymbols(source);
-		return Interpreter.translate(source);
+		return source;
 	}
 
 	private static String[] removeComments(String[] source)
