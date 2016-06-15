@@ -14,12 +14,20 @@ BOF		1101	J
 BEQ		1110	J
 JMP		1111	J
 
-label $reg0 = x0000
-label $reg1 = x0001
-label $reg2 = x0002
-label $reg3 = x0003
-label $reg4 = x0004
-label $reg5 = x0005
-label $reg6 = x0006
-label $reg7 = x0007
-label $reg8 = x0008
+END
+
+label $reg0 = @0000
+label $reg1 = @0001
+label $reg2 = @0002
+label $reg3 = @0003
+label $reg4 = @0004
+label $reg5 = @0005
+label $reg6 = @0006
+label $reg7 = @0007
+label $ar0 = @0010
+label $ar1 = @0011
+label $ar2 = @0012
+label $ar3 = @0013
+label $sp = @0014
+
+END
