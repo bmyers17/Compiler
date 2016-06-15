@@ -14,20 +14,36 @@ BOF		1101	J
 BEQ		1110	J
 JMP		1111	J
 
+BREAK
+
+label $reg0 = @
+label $reg1 = @
+label $reg2 = @
+label $reg3 = @
+label $reg4 = @
+label $reg5 = @
+label $reg6 = @
+label $reg7 = @
+label $ar0 = @
+label $ar1 = @
+label $ar2 = @
+label $ar3 = @
+label $sp = @
+label $ZERO = @
+label $ONE = @
+
+BREAK
+
+MACRO ADDi
+LOAD @0
+ACAD
+LOAD @1
+ADD
+DATA
+STORE
 END
 
-label $reg0 = @0000
-label $reg1 = @0001
-label $reg2 = @0002
-label $reg3 = @0003
-label $reg4 = @0004
-label $reg5 = @0005
-label $reg6 = @0006
-label $reg7 = @0007
-label $ar0 = @0010
-label $ar1 = @0011
-label $ar2 = @0012
-label $ar3 = @0013
-label $sp = @0014
-
-END
+MACRO ADDm
+LOAD @1
+ACAD
+READ
