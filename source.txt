@@ -1,0 +1,15 @@
+@0000
+label times = x16
+READr times
+label increment = x17
+LOADri increment x0
+//begin loop
+label loop = here
+SENDi x1111
+SENDr times
+INCr increment
+BLTrr increment times loop
+PUSHr times
+PUSHr increment
+BEQrr times increment oneMORE!
+label oneMORE! = here

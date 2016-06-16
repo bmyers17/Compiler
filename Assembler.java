@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.Iterator;
 import java.io.File;
 
+import java.util.Arrays;
+
 public class Assembler
 {
 	private static HashMap<String, String[]> implementations;
@@ -18,6 +20,9 @@ public class Assembler
 
 	public static String[] assemble(String[] source)
 	{
+		implementations = new HashMap<String, String[]>();
+		symbols = new HashMap<String, String>();
+
 		source = initialPass(source);
 		
 		return finalPass(source);
@@ -52,7 +57,7 @@ public class Assembler
 
 			if (index > 0)
 				updatedSource.add(line.substring(0, index));
-			else if (line.length() > 0)
+			else if (index == -1 && line.length() > 0)
 				updatedSource.add(line);
 		}
 
@@ -66,13 +71,13 @@ public class Assembler
 
 	private static String[] parseInitial(String[] source)
 	{
-		memoryLocation = Integer.parseInt(source[0].substring(1), 16);
+		memoryLocation = Integer.parseInt(source[0].substring(1, source[0].indexOf(" ")), 16);
 
 		int macros = 1;
 
 		while (source[macros].substring(0, source[macros].indexOf(" ")).equals("MACRO"))
 		{
-			String code = source[macros].substring(0, source[macros].indexOf(" "));
+			String code = source[macros].substring(source[macros].indexOf(" ")).trim();
 			ArrayList<String> implementation = new ArrayList<String>();
 
 			macros++;
@@ -82,6 +87,8 @@ public class Assembler
 				implementation.add(source[macros]);
 				macros++;
 			}
+
+			macros++;
 
 			String[] finalImplementation = new String[implementation.size()];
 
@@ -177,13 +184,14 @@ public class Assembler
 		ArrayList<String> updatedSource = new ArrayList<String>();
 
 		for (String line : source)
+		{
 			if (line.substring(0, line.indexOf(" ")).equals("label"))
 			{
 				String id = line.substring(line.indexOf(" ") + 1, line.indexOf("=") - 1);
 				String value = line.substring(line.indexOf("=") + 1).trim();
 
 				if (value.equals("here"))
-					value = Integer.toString(memoryLocation + updatedSource.size(), 16);
+					value = "x" + Integer.toString(memoryLocation + updatedSource.size(), 16);
 				else if (symbols.containsKey(value))
 					value = symbols.get(value);
 
@@ -191,6 +199,7 @@ public class Assembler
 			}
 			else
 				updatedSource.add(line);
+		}
 
 		String[] sourceNoSymbols = new String[updatedSource.size()];
 

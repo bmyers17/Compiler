@@ -1,7 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Facade
 {
@@ -23,6 +26,12 @@ public class Facade
 		initializeMachine(configurator);
 
 		String[] source = addPreface(configurator, reader);
+
+		String[] assembled = assemble(source);
+		String[] translated = interpret(assembled);
+
+		writeFile(destinationPaths[0], assembled);
+		writeFile(destinationPaths[1], translated);
 	}
 
 	private static Scanner initializeScanner(String filePath)
@@ -47,6 +56,8 @@ public class Facade
 		{
 			if (!line.equals(""))
 				symbols.add(line);
+
+			line = parser.nextLine();
 		}
 
 		ArrayList<String> macros = new ArrayList<String>();
@@ -56,6 +67,8 @@ public class Facade
 		{
 			if (!line.equals(""))
 				macros.add(line);
+
+			line = parser.nextLine();
 		}
 
 		ArrayList<String> sourceCode = new ArrayList<String>();
@@ -72,6 +85,8 @@ public class Facade
 			sourceCode.add(macros.remove(0));
 		while (symbols.size() != 0)
 			sourceCode.add(symbols.remove(0));
+		while(source.hasNext())
+			sourceCode.add(source.nextLine());
 
 		String[] finalSourceCode = new String[sourceCode.size()];
 
@@ -83,7 +98,7 @@ public class Facade
 
 	private static void initializeMachine(Scanner parser)
 	{
-		ArrayList[] machineInformation = new ArrayList[3];
+		ArrayList[] machineInformation = new ArrayList[] {new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>()};
 
 		String token = parser.next();
 		while (!token.equals("BREAK"))
@@ -96,5 +111,28 @@ public class Facade
 		}
 
 		Interpreter.initialize(machineInformation);
+		Assembler.initializeImplementations(machineInformation[0]);
+	}
+
+	private static void writeFile(String filePath, String[] data)
+	{
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filePath)));
+
+			for (String line : data)
+			{
+				writer.write(line);
+				writer.newLine();
+			}
+
+			writer.close();
+		}
+		catch (IOException e) {}
+	}
+
+	public static void main(String[] args)
+	{
+		compile("InstructionFile", "source.txt", new String[] {"assembled.txt", "translated.txt"});
 	}
 }

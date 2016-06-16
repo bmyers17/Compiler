@@ -2,52 +2,58 @@ Assembly Instructions (extended instruction set)
 
 Arithmetic/Logical Instructions
 
-ADDi @A @B //@A is memory address, @B is data literal, result stored in @A
-ADDm @A @B //@A is memory address, @B is memory address, result stored in @A
-SUBi @A @B //@A is memory address, @B is data literal, result stored in @A
-SUBm @A @B //@A is memory address, @B is memory address, result stored in @A
-INC @A //@A is the address of the variable to be incremented
-DEC @A //@A is the address of the variable to be decremented
-BSL @A //@A is the address of the variable to be bit shifted left
-BSR @A //@A is the address of the variable to be bit shifted right
-NEG @A //@A is the address of the variable to be negated arithmetically
-NANDi @A @B //@A is memory address, @B is data literal, result stored in @A
-NANDm @A @B //@A is memory address, @B is memory address, result stored in @A
-ANDi @A @B //@A is memory address, @B is data literal, result stored in @A
-ANDm @A @B //@A is memory address, @B is memory address, result stored in @A
-ORi @A @B //@A is memory address, @B is data literal, result stored in @A
-ORm @A @B //@A is memory address, @B is memory address, result stored in @A
-XORi @A @B //@A is memory address, @B is data literal, result stored in @A
-XORm @A @B //@A is memory address, @B is memory address, result stored in @A
-NOT @A //@A is the address of the variable to be negated logically
+ADDri @A @B //@A is memory address, @B is data literal, result stored in @A
+ADDrr @A @B //@A is memory address, @B is memory address, result stored in @A
+SUBri @A @B //@A is memory address, @B is data literal, result stored in @A
+SUBrr @A @B //@A is memory address, @B is memory address, result stored in @A
+INCr @A //@A is the address of the variable to be incremented
+DECr @A //@A is the address of the variable to be decremented
+BSLr @A //@A is the address of the variable to be bit shifted left
+BSRr @A //@A is the address of the variable to be bit shifted right
+NEGr @A //@A is the address of the variable to be negated arithmetically
+NANDri @A @B //@A is memory address, @B is data literal, result stored in @A
+NANDrr @A @B //@A is memory address, @B is memory address, result stored in @A
+ANDri @A @B //@A is memory address, @B is data literal, result stored in @A
+ANDrr @A @B //@A is memory address, @B is memory address, result stored in @A
+ORri @A @B //@A is memory address, @B is data literal, result stored in @A
+ORrr @A @B //@A is memory address, @B is memory address, result stored in @A
+XORri @A @B //@A is memory address, @B is data literal, result stored in @A
+XORrr @A @B //@A is memory address, @B is memory address, result stored in @A
+NOTr @A //@A is the address of the variable to be negated logically
 
 Memory Instructions
 
 PUSHi @A //@A is data literal
-PUSHm @A //@A is memory address
-POP @A //@A is a memory address
-LOADi @A @B //@A is data literal, @B is memory address
-MOV @A @B //@A is memory address, @B is memory address
+PUSHr @A //@A is memory address
+POPr @A //@A is a memory address
+LOADri @A @B //@A is memory address, @B is data literal
+MOVrm @A @B //@A is memory address, @B is memory address
+MOVrr @A @B //@A is memory address, @B is memory address
+MOVmr @A @B //@A is memory address, @B is memory address
 
 I/O Instructions
 
 SENDi @A //@A is data literal
-SENDm @A //@A is memory address
-READ @A //@A is memory address
+SENDr @A //@A is memory address
+READr @A //@A is memory address
 
 Program Control Instructions
 
-BOFi @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
-BOFm @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
-BEQi @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
-BEQm @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
-BGTi @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
-BGTm @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
-BLTi @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
-BLTm @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
-BNEQi @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
-BNEQm @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
+BOFri @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
+BOFrr @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
+BEQri @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
+BEQrr @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
+BLTri @A @B @C //@A is memory address, @B is data literal, and @C is memory location literal
+BLTrr @A @B @C //@A is memory address, @B is memory address, and @C is memory location literal
 GOTO @A //@A is memory location literal
+
+**NOTE**
+
+All memory addresses MUST be a maximum of 12 bits long! That means only the first 8192 addresses can be accessed directly and manipulated.
+All other memory must be correspondingly first moved to the temporary register space and then manipulated.
+Program location literals, however, can be a maximum of 16 bits long. This includes [0]-[2^16-1]
+
+********
 
 Miscellaneous Instructions
 
@@ -84,7 +90,6 @@ The very first noncomment line in the file must contain the actual line in progr
 
 @1A9F
 
-Where the location is specified in hexidecimal.
-
-Identify all memory locations in the form @0000 where 0000 is the address in hexadecimal.
-Identify all literal values in the form x0000 or d00000 or b0000000000000000.
+Where the location is specified in hexadecimal.
+All memory locations should be in hexadecimal.
+Literal values can be in base 2, 10, or 16.
