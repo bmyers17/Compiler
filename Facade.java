@@ -15,32 +15,86 @@ public class Facade
 		return Interpreter.translate(source);
 	}
 
-	private static void initialize(String filePath)
+	private static void compile(String configurationPath, String sourcePath, String[] destinationPaths)
 	{
-		String[] file = null;
+		Scanner configurator = initializeScanner(configurationPath);
+		Scanner reader = initializeScanner(sourcePath);
+
+		initializeMachine(configurator);
+
+		String[] source = addPreface(configurator, reader);
+	}
+
+	private static Scanner initializeScanner(String filePath)
+	{
+		Scanner parser = null;
 
 		try
 		{
-			file = inputFile(filePath);
+			parser = new Scanner(new File(filePath));
 		}
-		catch (Exception e) {}
+		catch (FileNotFoundException e) {}
+
+		return parser;
 	}
 
-	private static String[] inputFile(String filePath) throws FileNotFoundException
+	private static String[] addPreface(Scanner parser, Scanner source)
 	{
-		File file = new File(filePath);
-		Scanner input = new Scanner(file);
+		ArrayList<String> symbols = new ArrayList<String>();
 
-		ArrayList<String> fileIn = new ArrayList<String>();
+		String line = parser.nextLine();
+		while (!line.equals("BREAK"))
+		{
+			if (!line.equals(""))
+				symbols.add(line);
+		}
 
-		while (input.hasNext())
-			fileIn.add(input.next());
+		ArrayList<String> macros = new ArrayList<String>();
 
-		String[] inputFile = new String[fileIn.size()];
+		line = parser.nextLine();
+		while (!line.equals("BREAK"))
+		{
+			if (!line.equals(""))
+				macros.add(line);
+		}
 
-		for (int k = 0; k < inputFile.length; k++)
-			inputFile[k] = fileIn.get(k);
+		ArrayList<String> sourceCode = new ArrayList<String>();
 
-		return inputFile;
+		line = source.nextLine();
+		while (line.charAt(0) != '@')
+		{
+			sourceCode.add(line);
+			line = source.nextLine();
+		}
+		sourceCode.add(line);
+
+		while (macros.size() != 0)
+			sourceCode.add(macros.remove(0));
+		while (symbols.size() != 0)
+			sourceCode.add(symbols.remove(0));
+
+		String[] finalSourceCode = new String[sourceCode.size()];
+
+		for (int k = 0; k < finalSourceCode.length; k++)
+			finalSourceCode[k] = sourceCode.get(k);
+
+		return finalSourceCode;
+	}
+
+	private static void initializeMachine(Scanner parser)
+	{
+		ArrayList[] machineInformation = new ArrayList[3];
+
+		String token = parser.next();
+		while (!token.equals("BREAK"))
+		{
+			machineInformation[0].add(token);
+			machineInformation[1].add(parser.next());
+			machineInformation[2].add(parser.next());
+
+			token = parser.next();
+		}
+
+		Interpreter.initialize(machineInformation);
 	}
 }

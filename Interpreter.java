@@ -1,15 +1,26 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Interpreter
 {
 	private static HashMap<String, String> codes;
 	private static HashMap<String, String> types;
 
-	public static void initialize(HashMap<String, String> opcodes, HashMap<String, String> insTypes)
+	public static void initialize(ArrayList[] machineInformation)
 	{
-		codes = opcodes;
-		types = insTypes;
+		codes = new HashMap<String, String>();
+		types = new HashMap<String, String>();
+
+		ArrayList<String> acronym = machineInformation[0];
+		ArrayList<String> binary = machineInformation[1];
+		ArrayList<String> insType = machineInformation[2];
+
+		for (int k = 0; k < machineInformation[0].size(); k++)
+		{
+			codes.put(acronym.get(k), binary.get(k));
+			types.put(acronym.get(k), insType.get(k));
+		}
 	}
 
 	public static String[] translate(String lines[])

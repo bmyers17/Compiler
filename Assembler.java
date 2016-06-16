@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Iterator;
@@ -8,17 +7,13 @@ import java.io.File;
 public class Assembler
 {
 	private static HashMap<String, String[]> implementations;
-	private static HashMap<String, String> opcodes;
-	private static HashMap<String, String> types;
 	private static HashMap<String, String> symbols;
-	private static HashSet<String> machineCodes;
+	private static ArrayList<String> machineCodes;
 	private static int memoryLocation;
 
-	public static void initializeImplementations(File insImplementations)
+	public static void initializeImplementations(ArrayList<String> codes)
 	{
-		implementations = new HashMap<String, String[]>();
-		opcodes = new HashMap<String, String>();
-		types = new HashMap<String, String>();
+		machineCodes = codes;
 	}
 
 	public static String[] assemble(String[] source)
