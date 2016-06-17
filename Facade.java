@@ -26,7 +26,6 @@ public class Facade
 		initializeMachine(configurator);
 
 		String[] source = addPreface(configurator, reader);
-
 		String[] assembled = assemble(source);
 		String[] translated = interpret(assembled);
 
@@ -83,13 +82,13 @@ public class Facade
 
 		while (macros.size() != 0)
 			sourceCode.add(macros.remove(0));
-		while (symbols.size() != 0)
-			sourceCode.add(symbols.remove(0));
 		while(source.hasNext())
 			sourceCode.add(source.nextLine());
+		while (symbols.size() != 0)
+			sourceCode.add(symbols.remove(0));
 
 		String[] finalSourceCode = new String[sourceCode.size()];
-
+		
 		for (int k = 0; k < finalSourceCode.length; k++)
 			finalSourceCode[k] = sourceCode.get(k);
 

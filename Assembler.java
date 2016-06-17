@@ -4,8 +4,6 @@ import java.util.Scanner;
 import java.util.Iterator;
 import java.io.File;
 
-import java.util.Arrays;
-
 public class Assembler
 {
 	private static HashMap<String, String[]> implementations;
@@ -156,8 +154,13 @@ public class Assembler
 	{
 		Scanner parser = new Scanner(line);
 		String code = parser.next();
+		String[] implementation = null;
 
-		String[] implementation = new String[implementations.get(code).length];
+		try
+		{
+			implementation = new String[implementations.get(code).length];
+		}
+		catch (NullPointerException e) {System.out.println(code); System.exit(0);}
 
 		for (int k = 0; k < implementation.length; k++)
 			implementation[k] = implementations.get(code)[k];
