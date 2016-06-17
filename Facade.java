@@ -59,13 +59,13 @@ public class Facade
 			line = parser.nextLine();
 		}
 
-		ArrayList<String> macros = new ArrayList<String>();
+		ArrayList<String> macrosAssembly = new ArrayList<String>();
 
 		line = parser.nextLine();
 		while (!line.equals("BREAK"))
 		{
 			if (!line.equals(""))
-				macros.add(line);
+				macrosAssembly.add(line);
 
 			line = parser.nextLine();
 		}
@@ -80,8 +80,8 @@ public class Facade
 		}
 		sourceCode.add(line);
 
-		while (macros.size() != 0)
-			sourceCode.add(macros.remove(0));
+		while (macrosAssembly.size() != 0)
+			sourceCode.add(macrosAssembly.remove(0));
 		while(source.hasNext())
 			sourceCode.add(source.nextLine());
 		while (symbols.size() != 0)

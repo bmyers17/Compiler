@@ -1,8 +1,9 @@
 @0000
-label zero = here
-READr x0
-READr x1
-SUBrr x0 x1
-BEQri x0 x0 zero
-SENDr x0
+INITIALIZE
+READr $reg0
+READr $reg1
+BEQrr $reg0 $reg1 message
+WRITEr x0
+label message = here
+WRITEr x1
 HALT

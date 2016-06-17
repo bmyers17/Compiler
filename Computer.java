@@ -31,8 +31,8 @@ public class Computer
 			case "0001":
 				break;
 
-			case "1000":
-				databuffer = ac;
+			case "0011":
+				System.out.println(ac);
 				break;
 
 			case "0100":
@@ -51,8 +51,8 @@ public class Computer
 				ac = input.nextInt();
 				break;
 
-			case "0011":
-				System.out.println(ac);
+			case "1000":
+				databuffer = ac;
 				break;
 
 			case "1001":
@@ -75,11 +75,15 @@ public class Computer
 			case "1101":
 				if (ac + data[membuffer] < 0)
 					pc = Integer.parseInt(program[pc], 2);
+				else
+					pc++;
 				break;
 
 			case "1110":
 				if (ac == data[membuffer])
 					pc = Integer.parseInt(program[pc], 2);
+				else
+					pc++;
 				break;
 
 			case "1111":
