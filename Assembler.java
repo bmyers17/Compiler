@@ -198,11 +198,11 @@ public class Assembler
 		{
 			if (line.substring(0, line.indexOf(" ")).equals("label"))
 			{
-				String id = line.substring(line.indexOf(" ") + 1, line.indexOf("=") - 1);
+				String id = line.substring(line.indexOf(" "), line.indexOf("=") - 1).trim();
 				String value = line.substring(line.indexOf("=") + 1).trim();
 
 				if (value.equals("here"))
-					value = "x" + Integer.toString(memoryLocation + updatedSource.size() + extraBytes, 16);
+					value = "x" + Integer.toString(memoryLocation + updatedSource.size() + extraBytes + 1, 16);
 				else if (symbols.containsKey(value))
 					value = symbols.get(value);
 
