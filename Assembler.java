@@ -9,11 +9,16 @@ public class Assembler
 	private static HashMap<String, String[]> implementations;
 	private static HashMap<String, String> symbols;
 	private static ArrayList<String> machineCodes;
+	private static HashMap<String, String> types;
 	private static int memoryLocation;
 
-	public static void initializeImplementations(ArrayList<String> codes)
+	public static void initializeImplementations(ArrayList[] codes)
 	{
-		machineCodes = codes;
+		machineCodes = (ArrayList<String>) codes[0];
+		types = new HashMap<String, String>();
+		
+		for (int k = 0; k < machineCodes.size(); k++)
+			types.put(machineCodes.get(k), (String) codes[2].get(k));
 	}
 
 	public static String[] assemble(String[] source)
@@ -98,10 +103,10 @@ public class Assembler
 
 		String[] adjusted = new String[source.length - macros + 1];
 
-		adjusted[0] = "INITIALIZE";
+		adjusted[0] = "INITIALIZE ";
 
-		for (int k = 0; k < adjusted.length; k++)
-			adjusted[k] = source[macros + k];
+		for (int k = 1; k < adjusted.length; k++)
+			adjusted[k] = source[macros + k - 1];
 
 		return adjusted;
 	}
@@ -187,6 +192,7 @@ public class Assembler
 	private static String[] mapSymbols(String[] source)
 	{
 		ArrayList<String> updatedSource = new ArrayList<String>();
+		int extraBytes = 0;
 
 		for (String line : source)
 		{
@@ -196,14 +202,19 @@ public class Assembler
 				String value = line.substring(line.indexOf("=") + 1).trim();
 
 				if (value.equals("here"))
-					value = "x" + Integer.toString(memoryLocation + updatedSource.size(), 16);
+					value = "x" + Integer.toString(memoryLocation + updatedSource.size() + extraBytes, 16);
 				else if (symbols.containsKey(value))
 					value = symbols.get(value);
 
 				symbols.put(id, value);
 			}
 			else
+			{
 				updatedSource.add(line);
+
+				if (types.get(line.substring(0, line.indexOf(" "))).equals("J"))
+					extraBytes++;
+			}
 		}
 
 		String[] sourceNoSymbols = new String[updatedSource.size()];

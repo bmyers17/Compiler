@@ -110,7 +110,7 @@ public class Facade
 		}
 
 		Interpreter.initialize(machineInformation);
-		Assembler.initializeImplementations(machineInformation[0]);
+		Assembler.initializeImplementations(machineInformation);
 	}
 
 	private static void writeFile(String filePath, String[] data)

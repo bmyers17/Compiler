@@ -5,11 +5,12 @@ public class Computer
 {
 	private int[] data = new int[(int) Math.pow(2, 16)];
 	private String[] program;
-	private int pc = 0;
+	private int pc = 1;
 	private int ac;
 	private int membuffer;
 	private int databuffer;
 	private Scanner input = new Scanner(System.in);
+	private static final int CLOCK = 250;
 
 	public Computer(String[] mem) { program = mem; }
 
@@ -17,9 +18,15 @@ public class Computer
 
 	private void step()
 	{
+		try
+		{
+			Thread.sleep(CLOCK);
+		}
+		catch (Exception e) {}
+
 		String ins = program[pc];
 		String opcode = ins.substring(0, 4);
-		//System.out.println(pc + " : " + ac);
+		System.out.println(pc + " : " + ac);
 		pc++;
 
 		switch(opcode)
@@ -73,18 +80,22 @@ public class Computer
 				break;
 
 			case "1101":
+			{
 				if (ac + data[membuffer] < 0)
 					pc = Integer.parseInt(program[pc], 2);
 				else
 					pc++;
 				break;
+			}
 
 			case "1110":
+			{
 				if (ac == data[membuffer])
 					pc = Integer.parseInt(program[pc], 2);
 				else
 					pc++;
 				break;
+			}
 
 			case "1111":
 				pc = Integer.parseInt(program[pc], 2);
@@ -96,7 +107,7 @@ public class Computer
 	{
 		Scanner reader = new Scanner(new File("translated.txt"));
 		String[] pmem = new String[(int) Math.pow(2, 16)];
-		int c = 0;
+		int c = 1;
 
 		while (reader.hasNext())
 		{
