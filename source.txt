@@ -1,5 +1,4 @@
 @0000
-INITIALIZE
 READr $reg0
 READr $reg1
 BEQrr $reg0 $reg1 message

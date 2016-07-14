@@ -96,7 +96,9 @@ public class Assembler
 			implementations.put(code, finalImplementation);
 		}
 
-		String[] adjusted = new String[source.length - macros];
+		String[] adjusted = new String[source.length - macros + 1];
+
+		adjusted[0] = "INITIALIZE";
 
 		for (int k = 0; k < adjusted.length; k++)
 			adjusted[k] = source[macros + k];
