@@ -10,7 +10,7 @@ public class Computer
 	private int membuffer;
 	private int databuffer;
 	private Scanner input = new Scanner(System.in);
-	private static final int CLOCK = 150;
+	private static final int CLOCK = 200;
 
 	public Computer(String[] mem) { program = mem; }
 
