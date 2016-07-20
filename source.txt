@@ -2,12 +2,10 @@
 READr $reg0
 READr $reg1
 MOVrr $ZERO $reg2
-MOVrr $ZERO $reg3
 label top = here
-ADDrr $reg2 $reg0
-INCr $reg3
-BEQrr $reg3 $reg1 end
-GOTO top
-label end = here
+SUBrr $reg0 $reg1
+INCr $reg2
+BLTrr $reg1 $reg0 top
 WRITEr $reg2
+WRITEr $reg0
 HALT
