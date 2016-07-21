@@ -31,64 +31,68 @@ public class Computer
 
 		switch(opcode)
 		{
-			case "0000":
+			case "0000":	//HLT
 				System.exit(0);
 				break;
 
-			case "0001":
+			case "0001":	//NOP
 				break;
 
-			case "0011":
-				System.out.println(ac);
-				break;
-
-			case "0100":
-				ac = data[membuffer];
-				break;
-
-			case "0101":
-				ac = ac + data[membuffer];
-				break;
-
-			case "0110":
-				ac = ~(ac & data[membuffer]);
-				break;
-
-			case "0111":
-				ac = input.nextInt();
-				break;
-
-			case "1000":
-				databuffer = ac;
-				break;
-
-			case "1001":
-				membuffer = ac;
-				break;
-
-			case "1010":
+			case "0010":	//LTA
 				membuffer = Integer.parseInt(ins.substring(4), 2);
 				break;
 
-			case "1011":
+			case "0011":	//ACA
+				membuffer = ac;
+				break;
+
+			case "0100":	//FCH
+				ac = data[membuffer];
+				break;
+
+			case "0101":	//NND
+				ac = ~(ac & data[membuffer]);
+				break;
+
+			case "0110":	//ADD
+				ac = ac + data[membuffer];
+				break;
+
+			case "0111":	//SUB
+				ac = data[membuffer] - ac;
+				break;
+
+			case "1000":	//RDV
+				ac = input.nextInt();
+				break;
+
+			case "1001":	//WRT		
+				System.out.println(ac);
+				break;
+
+			case "1010":	//DAT
+				databuffer = ac;
+				break;
+
+			case "1011":	//STR
 				data[membuffer] = databuffer;
 				break;
 
-			case "1100":
+			case "1100":	//LOD
 				ac = Integer.parseInt(program[pc], 2);
 				pc++;
 				break;
 
-			case "1101":
+			case "1101":	//BLT
 			{
-				if (ac + data[membuffer] < 0)
+				if (data[membuffer] - ac < 0)
 					pc = Integer.parseInt(program[pc], 2);
 				else
 					pc++;
 				break;
 			}
 
-			case "1110":
+			case "1110":	//BEQ
 			{
 				if (ac == data[membuffer])
 					pc = Integer.parseInt(program[pc], 2);
@@ -97,7 +101,7 @@ public class Computer
 				break;
 			}
 
-			case "1111":
+			case "1111":	//JMP
 				pc = Integer.parseInt(program[pc], 2);
 				break;
 		}

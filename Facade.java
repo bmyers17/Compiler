@@ -121,8 +121,11 @@ public class Facade
 
 			for (String line : data)
 			{
-				writer.write(line);
-				writer.newLine();
+				if (line != null)
+				{
+					writer.write(line);
+					writer.newLine();
+				}
 			}
 
 			writer.close();

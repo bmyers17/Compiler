@@ -8,4 +8,4 @@ INCr $reg2
 BLTrr $reg1 $reg0 top
 WRITEr $reg2
 WRITEr $reg0
-HALT
+HLT
