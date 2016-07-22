@@ -25,35 +25,68 @@ RDV
 LTA x0 
 DAT 
 STR 
-RDV 
-LTA x1 
-DAT 
-STR 
-LTA x13 
-FCH 
-LTA x2 
-DAT 
-STR 
-LTA x1 
-FCH 
-LTA x0 
-SUB 
-DAT 
-STR 
-LTA x14 
-FCH 
-LTA x2 
-ADD 
+LOD x2 
+LTA x3 
 DAT 
 STR 
 LTA x0 
 FCH 
-LTA x1 
-BLT 
-LTA x2 
+WRT 
+LTA x3 
 FCH 
 WRT 
 LTA x0 
+FCH 
+LTA $reg6 
+DAT 
+STR 
+LTA x3 
+FCH 
+LTA x5 
+DAT 
+STR 
+LTA x5 
+FCH 
+LTA $reg6 
+SUB 
+DAT 
+STR 
+LTA $reg6 
+FCH 
+LTA x5 
+BLT x35 
+LTA $reg6 
+FCH 
+LTA x5 
+BEQ x35 
+LTA $reg7 
+FCH 
+WRT 
+LTA x13 
+FCH 
+LTA $reg7 
+BEQ x5f 
+LTA x14 
+FCH 
+LTA x3 
+ADD 
+DAT 
+STR 
+LTA x3 
+FCH 
+LTA x0 
+BLT x25 
+LOD x1 
+LTA x4 
+DAT 
+STR 
+JMP x64 
+LOD x0 
+LTA x4 
+DAT 
+STR 
+NOP 
+LTA x4 
 FCH 
 WRT 
 HLT 

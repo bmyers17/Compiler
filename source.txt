@@ -1,11 +1,12 @@
 @0000
-READr $reg0
-READr $reg1
-MOVrr $ZERO $reg2
-label top = here
-SUBrr $reg0 $reg1
-INCr $reg2
-BLTrr $reg1 $reg0 top
-WRITEr $reg2
-WRITEr $reg0
-HLT
+MACRO MOD
+label mod_result = $reg7
+label dividend = $reg6
+label divisor = $reg5
+MOVrr @0 dividend
+MOVrr @1 divisor
+label loop_top = here
+SUBrr dividend divisor
+BLTrr divisor dividend loop_top
+BEQrr divisor dividend loop_top
+END
